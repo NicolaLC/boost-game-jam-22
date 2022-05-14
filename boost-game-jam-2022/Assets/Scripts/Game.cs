@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class Game : SingletonPattern<Game>
 {
@@ -12,6 +15,7 @@ public class Game : SingletonPattern<Game>
 
     private int m_GameAwakenCount = 0; // max 5
     private int m_PlayerActiveRunes = 2;
+    private bool m_bGameStopped = false;
     
     public enum TurnTarget
     {
@@ -26,7 +30,10 @@ public class Game : SingletonPattern<Game>
     private Coroutine m_WaitForPlayerActionCoroutine = null;
     private bool m_bPlayerSelectedCell = false;
 
+    private bool m_bGameStarted = false;
+
     public static TurnTarget CurrentTarget => Instance.m_CurrentTarget;
+    public static bool GameStarted => Instance.m_bGameStarted;
 
     public static void CellSelected(int i_Row, int i_Col, TurnTarget i_Caller)
     {
@@ -43,12 +50,49 @@ public class Game : SingletonPattern<Game>
         base.Start();
         
         m_CurrentTarget = Random.value > 0.5f ? TurnTarget.AI : TurnTarget.Player;
+
+        StartCoroutine(StartGame());
+    }
+
+    private void Update()
+    {
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Console.Clear();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            StartCoroutine(PlayerWin());
+            StartCoroutine(RestartGame());
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            StartCoroutine(PlayerLose());
+            StartCoroutine(RestartGame());
+        }
+#endif
+    }
+    
+    private IEnumerator StartGame()
+    {
+        yield return new WaitForSeconds(2);
+
+        m_bGameStarted = true;
         
         NextTurn();
     }
 
     private void NextTurn()
     {
+        if (m_bGameStopped)
+        {
+            return;
+        }
+        
         if (m_CurrentTarget == TurnTarget.AI)
         {
             Debug.Log("[GAME] AI Turn.");
@@ -75,6 +119,10 @@ public class Game : SingletonPattern<Game>
     
     private void ChangeTarget()
     {
+        if (m_bGameStopped)
+        {
+            return;
+        }
         m_CurrentTarget = m_CurrentTarget == TurnTarget.Player ? TurnTarget.AI : TurnTarget.Player;
     }
 
@@ -94,6 +142,11 @@ public class Game : SingletonPattern<Game>
 
     private void Internal_CellSelected(int i_Row, int i_Col)
     {
+        if (m_bGameStopped)
+        {
+            return;
+        }
+        
         if (m_CurrentTarget == TurnTarget.Player)
         {
             m_bPlayerSelectedCell = true;
@@ -147,7 +200,7 @@ public class Game : SingletonPattern<Game>
         {
             print("Game ended - nobody wins");
 
-            RestartGame();
+            StartCoroutine(RestartGame());
         }
         else
         {
@@ -157,49 +210,77 @@ public class Game : SingletonPattern<Game>
             {
                 m_GameAwakenCount++;
                 
-                GameUIController.OnPlayerWin(m_GameAwakenCount);
+                GameUIController.OnPlayerScore(m_GameAwakenCount);
 
                 if (m_GameAwakenCount == 5)
                 {
-                    PlayerWin();
+                    StartCoroutine(PlayerWin());
                 }
                 else
                 {
-                    RestartGame();
+                    StartCoroutine(RestartGame());
                 }
             }
             else
             {
                 m_PlayerActiveRunes--;
+
+                GameUIController.OnAIScore();
+                
                 if (m_PlayerActiveRunes <= 0)
                 {
-                    PlayerLose();
+                    StartCoroutine(PlayerLose());
                 }
                 else
                 {
-                    RestartGame();
+                    StartCoroutine(RestartGame());
                 }
             }
         }
-
-        m_PlayerCamera.SetEndGamePosition();
     }
 
-    private void RestartGame()
+    private IEnumerator RestartGame()
     {
+        StopCoroutine(m_WaitForPlayerActionCoroutine);
+        StopCoroutine(m_WaitForAIActionCoroutine);
+        
+        m_bGameStopped = true;
+        
+        yield return new WaitForSeconds(2);
+        
         m_Board.Reset();
             
         ChangeTarget();
         NextTurn();
+        
+        m_bGameStopped = false;
     }
 
-    private void PlayerWin()
+    private IEnumerator PlayerWin()
     {
+        m_bGameStopped = true;
+        
         Debug.Log("Player win - show win screen");
+        
+        m_AI.DoDeathAnimation();
+        
+        yield return new WaitForSeconds(2);
+        
+        m_PlayerCamera.SetEndGamePosition();
+        
+        m_bGameStopped = false;
     }
     
-    private void PlayerLose()
+    private IEnumerator PlayerLose()
     {
+        m_bGameStopped = true;
+        
         Debug.Log("Player lose - show lose screen");
+        
+        yield return new WaitForSeconds(2);
+        
+        m_PlayerCamera.SetEndGamePosition();
+        
+        m_bGameStopped = false;
     }
 }

@@ -16,17 +16,6 @@ public class CellController : MonoBehaviour
 
     private BoardController.CellValue m_Value = BoardController.CellValue.None;
 
-    private void Update()
-    {
-        #if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            Console.Clear();
-        }
-        #endif
-    }
-
     public void Setup(int i_Row, int i_Col)
     {
         m_row = i_Row;
@@ -50,6 +39,11 @@ public class CellController : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        if (!Game.GameStarted)
+        {
+            return;
+        }
+        
         if (m_Value != BoardController.CellValue.None)
         {
             return;
@@ -59,7 +53,7 @@ public class CellController : MonoBehaviour
         {
             return;
         }
-        
+
         StartGlow();
     }
 

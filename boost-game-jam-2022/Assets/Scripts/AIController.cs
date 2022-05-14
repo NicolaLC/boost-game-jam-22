@@ -12,10 +12,13 @@ public class AIController : MonoBehaviour
         public int row = 0;
         public int column = 0;
     }
+    
+    [SerializeField]
+    private Animator m_Animator = null;
 
     private bool m_bFirstChoice = true;
-    private List<AIStep> m_PossibleMoves = new List<AIStep>();
-    
+    private readonly List<AIStep> m_PossibleMoves = new List<AIStep>();
+
     public bool GetNextMove(BoardController i_Board, out int o_Row, out int o_Col)
     {
         // for now, get a random empty cell
@@ -223,5 +226,10 @@ public class AIController : MonoBehaviour
         }
 
         return weight * i_Multiplier;
+    }
+
+    public void DoDeathAnimation()
+    {
+        m_Animator.Play("Boss_Death");
     }
 }
