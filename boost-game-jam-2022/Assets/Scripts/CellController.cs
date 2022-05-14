@@ -130,4 +130,10 @@ public class CellController : MonoBehaviour
             m_PlayerGraphics.SetActive(m_Value == BoardController.CellValue.Player);
         }
     }
+
+    public void Reset()
+    {
+        m_Value = BoardController.CellValue.None;
+        SetGraphics();
+    }
 }

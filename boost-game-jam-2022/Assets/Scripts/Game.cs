@@ -9,6 +9,9 @@ public class Game : SingletonPattern<Game>
     private CameraController m_PlayerCamera = null;
     [SerializeField]
     private AIController m_AI = null;
+
+    private int m_GameAwakenCount = 0; // max 5
+    private int m_PlayerActiveRunes = 2;
     
     public enum TurnTarget
     {
@@ -143,12 +146,60 @@ public class Game : SingletonPattern<Game>
         if (i_bTie)
         {
             print("Game ended - nobody wins");
+
+            RestartGame();
         }
         else
         {
             print($"Game ended - {m_CurrentTarget} wins");
+
+            if (m_CurrentTarget == TurnTarget.Player)
+            {
+                m_GameAwakenCount++;
+                
+                GameUIController.OnPlayerWin(m_GameAwakenCount);
+
+                if (m_GameAwakenCount == 5)
+                {
+                    PlayerWin();
+                }
+                else
+                {
+                    RestartGame();
+                }
+            }
+            else
+            {
+                m_PlayerActiveRunes--;
+                if (m_PlayerActiveRunes <= 0)
+                {
+                    PlayerLose();
+                }
+                else
+                {
+                    RestartGame();
+                }
+            }
         }
 
         m_PlayerCamera.SetEndGamePosition();
+    }
+
+    private void RestartGame()
+    {
+        m_Board.Reset();
+            
+        ChangeTarget();
+        NextTurn();
+    }
+
+    private void PlayerWin()
+    {
+        Debug.Log("Player win - show win screen");
+    }
+    
+    private void PlayerLose()
+    {
+        Debug.Log("Player lose - show lose screen");
     }
 }

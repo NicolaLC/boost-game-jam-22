@@ -158,4 +158,16 @@ public class BoardController : MonoBehaviour
     {
         return m_Grid[i_Row][i_Col];
     }
+
+    public void Reset()
+    {
+        for (int row = 0; row < 3; ++row)
+        {
+            for (int col = 0; col < 3; ++col)
+            {
+                m_Grid[row][col] = CellValue.None;
+                m_Rows[row].cells[col].Reset();
+            }
+        }
+    }
 }
