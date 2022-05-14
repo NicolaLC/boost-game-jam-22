@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class GameSentences : SingletonPattern<GameSentences>
 {
@@ -13,6 +12,7 @@ public class GameSentences : SingletonPattern<GameSentences>
     {
         public string key = "";
         public string message = "";
+        public string name = "";
         public AudioClip sound = null;
     }
     
@@ -21,12 +21,16 @@ public class GameSentences : SingletonPattern<GameSentences>
     [SerializeField] 
     private TextMeshProUGUI m_PlayerCardText = null;
     [SerializeField] 
+    private TextMeshProUGUI m_PlayerCardNameText = null;
+    [SerializeField] 
     private Animator m_PlayerSentenceAnimator = null;
     
     [SerializeField] 
     private GameObject m_AISentenceRoot = null;
     [SerializeField] 
     private TextMeshProUGUI m_AICardText = null;
+    [SerializeField] 
+    private TextMeshProUGUI m_AICardNameText = null;
     [SerializeField] 
     private Animator m_AISentenceAnimator = null;
 
@@ -81,6 +85,7 @@ public class GameSentences : SingletonPattern<GameSentences>
         m_PlayerSentenceRoot.SetActive(true);
 
         m_PlayerCardText.text = sentence.key;
+        m_PlayerCardNameText.text = sentence.name;
 
         m_MasterGroup.volume = 0.5f;
         m_PlayerSentenceAnimator.Play("Sentence_In");
@@ -88,6 +93,7 @@ public class GameSentences : SingletonPattern<GameSentences>
         yield return new WaitForSeconds(5);
         
         m_PlayerCardText.text = "";
+        m_PlayerCardNameText.text = "";
         
         m_PlayerSentenceAnimator.Play("Sentence_Out");
         m_MasterGroup.volume = 1f;
@@ -110,7 +116,9 @@ public class GameSentences : SingletonPattern<GameSentences>
         m_RightAudioSource.PlayOneShot(sentence.sound);
         
         m_AISentenceRoot.SetActive(true);
+        
         m_AICardText.text = sentence.key;
+        m_AICardNameText.text = sentence.name;
         
         m_MasterGroup.volume = 0.5f;
         m_AISentenceAnimator.Play("Sentence_In");
@@ -122,6 +130,7 @@ public class GameSentences : SingletonPattern<GameSentences>
         yield return new WaitForSeconds(1);
         
         m_AICardText.text = "";
+        m_AICardNameText.text = "";
         m_AISentenceRoot.SetActive(false);
     }
 }

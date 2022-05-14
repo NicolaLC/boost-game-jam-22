@@ -1,5 +1,24 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!243 &-8746087708721153554
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: NegativeVoices
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 97453e2352b35495693bc53252fb8d05
+  m_Children: []
+  m_Volume: 933fa7276595b43afbc6efb753528f5d
+  m_Pitch: 1f91e36e58f3e4d72b97d8fe6e59d174
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -1919682836497493169}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!243 &-6983228477731043961
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -33,6 +52,20 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &-1919682836497493169
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 9abc682d1ed7740c4bc51ba017ceaf3d
+  m_EffectName: Attenuation
+  m_MixLevel: 7717a8f21c6e34077bf457ccb811d266
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!241 &24100000
 AudioMixerController:
   m_ObjectHideFlags: 0
@@ -55,6 +88,7 @@ AudioMixerController:
     - d8391bacb59d8496d96f68eae03263bb
     - 7bd31cdb0b76e44f69d95ba157bac26f
     - 293328296eda0489d91c9c03323e0a95
+    - 97453e2352b35495693bc53252fb8d05
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -102,6 +136,7 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 73c4b12223416486980b8ced312ff1c8
   m_FloatValues:
+    933fa7276595b43afbc6efb753528f5d: 9.925883
     fa05f80820ff741e6a9a7b0ea596133e: -9.833286
   m_TransitionOverrides: {}
 --- !u!244 &250168230621399986
@@ -149,6 +184,7 @@ AudioMixerGroupController:
   m_Children:
   - {fileID: -6983228477731043961}
   - {fileID: 1428255023351526540}
+  - {fileID: -8746087708721153554}
   m_Volume: e3d34a975907a4bdbacf81fa534bd4b5
   m_Pitch: 7db38c9374e824b10a1a32cb50312c22
   m_Send: 00000000000000000000000000000000

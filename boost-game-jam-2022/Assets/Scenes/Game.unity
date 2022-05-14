@@ -2097,7 +2097,7 @@ AudioSource:
   m_GameObject: {fileID: 1327814753}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -6983228477731043961, guid: be54b80efa104472598308b42941b9d3, type: 2}
+  OutputAudioMixerGroup: {fileID: -8746087708721153554, guid: be54b80efa104472598308b42941b9d3, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -2295,32 +2295,132 @@ MonoBehaviour:
   destroyOnLoad: 1
   m_PlayerSentenceRoot: {fileID: 971029648}
   m_PlayerCardText: {fileID: 128821504}
+  m_PlayerCardNameText: {fileID: 1112394812109958034}
   m_PlayerSentenceAnimator: {fileID: 1112394812109958033}
   m_AISentenceRoot: {fileID: 1429920209}
   m_AICardText: {fileID: 1429920208}
+  m_AICardNameText: {fileID: 1429920211}
   m_AISentenceAnimator: {fileID: 1429920210}
   m_LeftAudioSource: {fileID: 1327814756}
   m_RightAudioSource: {fileID: 1327814755}
   m_OriginalPositiveSentences:
   - key: Love
     message: "\u201CYou are my boy, I will always love you\u201D - Mum"
+    name: Mum
     sound: {fileID: 8300000, guid: f7867a6808a584981a07bbad5f6c4eec, type: 3}
   - key: Brave
     message: "\u201CYou are the bravest man I\u2019ve ever met\u201D - Friend"
+    name: Friend
     sound: {fileID: 8300000, guid: dd4783588bc714be6a4099f1b53f31d3, type: 3}
   - key: Proud
     message: "\u201CI am proud of you\u201D - Father"
+    name: Father
     sound: {fileID: 8300000, guid: dd4783588bc714be6a4099f1b53f31d3, type: 3}
+  - key: Believe
+    message: "\u201CI believe in you\u201D - Brother"
+    name: Brother
+    sound: {fileID: 8300000, guid: 59f35c4b803d3401b81bcfb93c6d2f80, type: 3}
+  - key: Perfect
+    message: "\u201CYou are perfect just the way you are\u201D - Brother"
+    name: Mum
+    sound: {fileID: 8300000, guid: 1a383510f65ec421c8bf6c8e59951554, type: 3}
+  - key: Heart
+    message: "\u201CI trust you with all my heart\u201D - Wife"
+    name: Wife
+    sound: {fileID: 8300000, guid: e143e627fe4cd4af48fe963f2346b32f, type: 3}
+  - key: Special
+    message: "\u201CYou are really something special\u201D - Wife"
+    name: Wife
+    sound: {fileID: 8300000, guid: 1a92ed98dbee14453be3c475ae672ddd, type: 3}
+  - key: Good
+    message: I'm a good person
+    name: You
+    sound: {fileID: 8300000, guid: c96b9bf99539348c08106c8314432421, type: 3}
+  - key: Not afraid
+    message: I'm not afraid of you
+    name: You
+    sound: {fileID: 8300000, guid: 9229f2345bb34479f91cb4c71c0e3066, type: 3}
+  - key: Not ashamed
+    message: I'm not ashamed
+    name: You
+    sound: {fileID: 8300000, guid: 061308cdfed5844939b3d3e4bbc734f3, type: 3}
+  - key: I can
+    message: I can do it
+    name: You
+    sound: {fileID: 8300000, guid: 6d7b09b9730fa4c1cb6a583f736aebd8, type: 3}
+  - key: Not true
+    message: That's not true
+    name: You
+    sound: {fileID: 8300000, guid: cca9a90a28611450fa8c2c9a0e2deee7, type: 3}
+  - key: Enough
+    message: I am enough
+    name: You
+    sound: {fileID: 8300000, guid: fa9185dfa59c34bb6b30dc6f0283c125, type: 3}
+  - key: Father
+    message: "I\u2019m a good father"
+    name: You
+    sound: {fileID: 8300000, guid: 9b291f9a602f542489540403f6b121b6, type: 3}
+  - key: Better
+    message: I'm better than you think
+    name: You
+    sound: {fileID: 8300000, guid: 31b4def7b976a40f188a2b0aa3c8c630, type: 3}
   m_OriginalNegativeSentences:
   - key: Nothing
     message: "\u201CThere is nothing you can do\u201D"
+    name: Demon
     sound: {fileID: 8300000, guid: 62bc1689efe844b47a70eefd1c99b30c, type: 3}
   - key: No chances
     message: "\u201CYou have no chances\u201D"
+    name: Demon
     sound: {fileID: 8300000, guid: 4ec3c7b3494a9464797632dffc610103, type: 3}
   - key: Screwed up
     message: "\u201CYou screwed up. Again\u201D"
+    name: Demon
     sound: {fileID: 8300000, guid: c326b12f33d15437ea7d28f2203b38a9, type: 3}
+  - key: Ugly
+    message: "\u201CYou are the ugliest human being I've ever seen\u201D"
+    name: Demon
+    sound: {fileID: 8300000, guid: 967fb9621b1fd40ddaad345ebe7a98fa, type: 3}
+  - key: Shut up
+    message: "\u201CShut up, you are nothing\u201D"
+    name: Demon
+    sound: {fileID: 8300000, guid: 9508e768e04ae4f09832496c890bee0a, type: 3}
+  - key: Coward
+    message: "\u201CRun, call you mummy!\u201D"
+    name: Demon
+    sound: {fileID: 8300000, guid: a2d293539021e431493d22828876e9f7, type: 3}
+  - key: Wimp
+    message: "\u201CYou can never defeat me\u201D"
+    name: Demon
+    sound: {fileID: 8300000, guid: c2381b6e8ffd14bd8806bdd7c02e49f4, type: 3}
+  - key: Fail
+    message: "\u201CYou will fail, believe me\u201D"
+    name: Demon
+    sound: {fileID: 8300000, guid: 8d46a2e42af9d47f5a4dbf71ec599dbe, type: 3}
+  - key: Mistakes
+    message: "\u201CYou only make mistakes\u201D"
+    name: Demon
+    sound: {fileID: 8300000, guid: 6a5912092199943198f54228954fcccc, type: 3}
+  - key: Imposter
+    message: "\u201CYou have no rights to be here\u201D"
+    name: Demon
+    sound: {fileID: 8300000, guid: af1141eb0cc4845c3a15e3631660da6f, type: 3}
+  - key: Whiner
+    message: "\u201CStop being such a baby\u201D"
+    name: Demon
+    sound: {fileID: 8300000, guid: 184ce703ea44b44b18be513dc2224390, type: 3}
+  - key: Disappointment
+    message: "\u201CI\u2019m disappointed in you\u201D"
+    name: Demon
+    sound: {fileID: 8300000, guid: c3ad6438d4429463198fa38d31937900, type: 3}
+  - key: Ridiculous
+    message: "\u201CYou are ridiculous\u201D"
+    name: Demon
+    sound: {fileID: 8300000, guid: f31a641f8da154e958b9cd77161a7afb, type: 3}
+  - key: Pathetic
+    message: '"You''re pathetic"'
+    name: Demon
+    sound: {fileID: 8300000, guid: 211bca818d88a41d1aeb552443433748, type: 3}
   m_MasterGroup: {fileID: 2132019355}
 --- !u!222 &1327814758
 CanvasRenderer:
@@ -2604,6 +2704,17 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 1880203385341401402, guid: 41747f72eeaf34e26bc916bea573c2a4, type: 3}
   m_PrefabInstance: {fileID: 1429920206}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1429920211 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5698528901583817113, guid: 41747f72eeaf34e26bc916bea573c2a4, type: 3}
+  m_PrefabInstance: {fileID: 1429920206}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1451053974
 GameObject:
   m_ObjectHideFlags: 0
@@ -4010,6 +4121,17 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 1880203385341401402, guid: 41747f72eeaf34e26bc916bea573c2a4, type: 3}
   m_PrefabInstance: {fileID: 1112394812109958032}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1112394812109958034 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5698528901583817113, guid: 41747f72eeaf34e26bc916bea573c2a4, type: 3}
+  m_PrefabInstance: {fileID: 1112394812109958032}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1206020052430106933
 PrefabInstance:
   m_ObjectHideFlags: 0
