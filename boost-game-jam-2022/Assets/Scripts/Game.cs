@@ -79,6 +79,8 @@ public class Game : SingletonPattern<Game>
     
     private IEnumerator StartGame()
     {
+        GameMessage.OnGameStart();
+        
         yield return new WaitForSeconds(2);
 
         m_bGameStarted = true;
@@ -92,7 +94,7 @@ public class Game : SingletonPattern<Game>
         {
             return;
         }
-        
+
         if (m_CurrentTarget == TurnTarget.AI)
         {
             Debug.Log("[GAME] AI Turn.");
@@ -130,12 +132,15 @@ public class Game : SingletonPattern<Game>
     {
         yield return new WaitForSeconds(1);
         
+        GameMessage.OnNextTurn();
         m_PlayerCamera.SetBoardLookPosition();
         
         while (!m_bPlayerSelectedCell)
         {
             yield return new WaitForEndOfFrame();
         }
+        
+        GameSentences.ShowSentence(true);
 
         m_bPlayerSelectedCell = false;
     }
@@ -158,6 +163,13 @@ public class Game : SingletonPattern<Game>
         
         m_Board.Apply(i_Row, i_Col, cellValue, out bool i_bWin);
 
+        StartCoroutine(MoveToNextTurn(i_bWin));
+    }
+
+    private IEnumerator MoveToNextTurn(bool i_bWin)
+    {
+        yield return new WaitForSeconds(5);
+
         if (i_bWin)
         {
             GameEnded();
@@ -179,14 +191,17 @@ public class Game : SingletonPattern<Game>
 
         yield return new WaitForSeconds(1);
         
+        GameMessage.OnNextTurn();
         m_PlayerCamera.SetPlayerPosition();
-        
+
         yield return new WaitForSeconds(UnityEngine.Random.Range(2, 5));
         
         bool canMove = m_AI.GetNextMove(m_Board, out int row, out int col);
             
         if (canMove)
         {
+            GameSentences.ShowSentence(false);
+
             Internal_CellSelected(row, col);
         }
         
@@ -248,12 +263,12 @@ public class Game : SingletonPattern<Game>
         
         yield return new WaitForSeconds(2);
         
+        m_bGameStopped = false;
+        
         m_Board.Reset();
             
         ChangeTarget();
         NextTurn();
-        
-        m_bGameStopped = false;
     }
 
     private IEnumerator PlayerWin()
