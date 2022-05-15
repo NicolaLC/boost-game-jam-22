@@ -18,9 +18,9 @@ public class CursorManager : SingletonPattern<CursorManager>
 
     private bool m_bLocked = false;
 
-    public static void SetDefault()
+    public static void SetDefault(bool i_bForce = false)
     {
-        Instance.Internal_SetCursor(CursorType.Default);
+        Instance.Internal_SetCursor(CursorType.Default, i_bForce);
     }
     
     public static void SetInteract()
@@ -40,9 +40,9 @@ public class CursorManager : SingletonPattern<CursorManager>
         SetDefault();
     }
 
-    private void Internal_SetCursor(CursorType i_Type)
+    private void Internal_SetCursor(CursorType i_Type, bool i_bForce = false)
     {
-        if (m_bLocked)
+        if (!i_bForce && m_bLocked)
         {
             return;
         }

@@ -284,7 +284,10 @@ public class Game : SingletonPattern<Game>
 
     private IEnumerator RestartGame(bool i_bPlayerWin)
     {
-        StopAllCoroutines();
+        m_PlayerCamera.SetPlayerPosition();
+        
+        if(m_WaitForPlayerActionCoroutine != null) StopCoroutine(m_WaitForPlayerActionCoroutine);
+        if(m_WaitForAIActionCoroutine != null) StopCoroutine(m_WaitForAIActionCoroutine);
         
         m_bGameStopped = true;
 
@@ -309,6 +312,8 @@ public class Game : SingletonPattern<Game>
     {
         m_bGameStopped = true;
         
+        CursorManager.SetDefault(true);
+        
         Debug.Log("Player win - show win screen");
         
         m_AI.DoDeathAnimation();
@@ -317,6 +322,8 @@ public class Game : SingletonPattern<Game>
         
         yield return new WaitForSeconds(2);
         
+        CursorManager.SetDefault(true);
+        
         EndGamePanels.OnWin();
     }
     
@@ -324,11 +331,15 @@ public class Game : SingletonPattern<Game>
     {
         m_bGameStopped = true;
         
+        CursorManager.SetDefault(true);
+        
         Debug.Log("Player lose - show lose screen");
         
         m_PlayerCamera.SetEndGamePosition();
         
         yield return new WaitForSeconds(2);
+        
+        CursorManager.SetDefault(true);
         
         EndGamePanels.OnLose();
     }

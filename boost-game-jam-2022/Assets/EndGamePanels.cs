@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndGamePanels : SingletonPattern<EndGamePanels>
 {
@@ -16,5 +17,10 @@ public class EndGamePanels : SingletonPattern<EndGamePanels>
     public static void OnLose()
     {
         Instance.m_LosePanel.SetActive(true);
+    }
+
+    public static void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
