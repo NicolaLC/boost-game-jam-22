@@ -298,19 +298,20 @@ public class Game : SingletonPattern<Game>
         
         yield return new WaitForSeconds(0.5f);
         
+        GameMessage.OnNewGame(m_PlayerActiveRunes, i_bPlayerWin);
+        yield return new WaitForSeconds(2);
+        
+        
         SceneTransition.Show();
         yield return new WaitForSeconds(2);
         
-        SceneTransition.Hide();
-        yield return new WaitForSeconds(2);
+        m_Board.Reset();
         
-        GameMessage.OnNewGame(m_PlayerActiveRunes, i_bPlayerWin);
+        SceneTransition.Hide();
         yield return new WaitForSeconds(2);
 
         m_bGameStopped = false;
-        
-        m_Board.Reset();
-            
+
         ChangeTarget();
         NextTurn();
     }

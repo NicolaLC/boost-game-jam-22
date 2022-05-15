@@ -256,7 +256,7 @@ public class AIController : MonoBehaviour
 
     private IEnumerator ChangeBossGraphics()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3.5f);
         if (m_CurrentBossIndex >= m_Bosses.Count - 1)
         {
             yield break;

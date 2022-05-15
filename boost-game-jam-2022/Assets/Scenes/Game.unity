@@ -1214,13 +1214,13 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ac1f04ed40f3648629274383490e9ac6, type: 3}
   - {fileID: 21300000, guid: 5171be433261d4c6ab173aead83ccea9, type: 3}
   - {fileID: 21300000, guid: b5cef94de1aa04f85a324930d122d899, type: 3}
-  - {fileID: 21300000, guid: 5171be433261d4c6ab173aead83ccea9, type: 3}
+  - {fileID: 21300000, guid: d5260ec92f6e941f0b2c11f49348f6c1, type: 3}
   - {fileID: 21300000, guid: 5171be433261d4c6ab173aead83ccea9, type: 3}
   m_BossesDecals:
   - {fileID: 1384386419}
   - {fileID: 1997264832}
-  - {fileID: 1572069313}
   - {fileID: 58013065}
+  - {fileID: 1572069313}
   - {fileID: 1527344502}
 --- !u!95 &275347409
 Animator:
@@ -5565,7 +5565,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 1428255023351526540, guid: be54b80efa104472598308b42941b9d3, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 1f5589d1781604a0091376237d4b106d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: dc64acef3235142dd974ee3bc07f4ba3, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
