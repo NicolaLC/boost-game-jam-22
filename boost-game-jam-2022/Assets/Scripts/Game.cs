@@ -248,7 +248,7 @@ public class Game : SingletonPattern<Game>
         {
             print("Game ended - nobody wins");
 
-            StartCoroutine(RestartGame(false));
+            StartCoroutine(RestartGame(false, true));
         }
         else
         {
@@ -287,7 +287,7 @@ public class Game : SingletonPattern<Game>
         }
     }
 
-    private IEnumerator RestartGame(bool i_bPlayerWin)
+    private IEnumerator RestartGame(bool i_bPlayerWin, bool i_bTie = false)
     {
         m_PlayerCamera.SetPlayerPosition();
 
@@ -303,7 +303,7 @@ public class Game : SingletonPattern<Game>
         
         yield return new WaitForSeconds(0.5f);
         
-        GameMessage.OnNewGame(m_PlayerActiveRunes, i_bPlayerWin);
+        GameMessage.OnNewGame(m_PlayerActiveRunes, i_bPlayerWin, i_bTie);
         yield return new WaitForSeconds(2);
         
         
