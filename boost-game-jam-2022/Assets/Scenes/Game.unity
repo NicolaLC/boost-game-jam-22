@@ -3192,6 +3192,30 @@ MonoBehaviour:
     message: I'm better than you think
     name: You
     sound: {fileID: 8300000, guid: 31b4def7b976a40f188a2b0aa3c8c630, type: 3}
+  - key: Worth
+    message: I know my worth
+    name: You
+    sound: {fileID: 8300000, guid: b60c46cb59d7c4aef8fb153257a14b4e, type: 3}
+  - key: Accomplished
+    message: I've accomplished so much
+    name: You
+    sound: {fileID: 8300000, guid: 63f8187fb0df44c7eb8cd420d689be3e, type: 3}
+  - key: Husband
+    message: "I\u2019m a good husband"
+    name: You
+    sound: {fileID: 8300000, guid: 2f9074147efea4cc6bc7e5af88103103, type: 3}
+  - key: Refuse
+    message: I refuse to give up
+    name: You
+    sound: {fileID: 8300000, guid: d97633bb0d1f54781b322ae0a3920fac, type: 3}
+  - key: Happy
+    message: I am happy with who I am
+    name: You
+    sound: {fileID: 8300000, guid: 6f23be88f5f0e474ba27a58058b43ff6, type: 3}
+  - key: Daughter
+    message: My daughter loves me
+    name: You
+    sound: {fileID: 8300000, guid: 4fb5c3328ac154c1bb9327c592c36bc9, type: 3}
   m_OriginalNegativeSentences:
   - key: Nothing
     message: "\u201CThere is nothing you can do\u201D"
@@ -3249,6 +3273,34 @@ MonoBehaviour:
     message: '"You''re pathetic"'
     name: Demon
     sound: {fileID: 8300000, guid: 211bca818d88a41d1aeb552443433748, type: 3}
+  - key: Man
+    message: You call yourself a man?
+    name: Demon
+    sound: {fileID: 8300000, guid: cb439d35c01764446b0ee035dc21128f, type: 3}
+  - key: Meaningless
+    message: Your life is meaningless
+    name: Demon
+    sound: {fileID: 8300000, guid: e1dbb00de958d45c3ae8a3e4da5da82c, type: 3}
+  - key: Leave you
+    message: Everyone will leave you
+    name: Demon
+    sound: {fileID: 8300000, guid: 54686c6a15e424d5e8788311da55a60c, type: 3}
+  - key: Disgrace
+    message: You are a disgrace
+    name: Demon
+    sound: {fileID: 8300000, guid: e178cec2f6d5f4b14b87d68db70d60ef, type: 3}
+  - key: Loser
+    message: You're a loser
+    name: Demon
+    sound: {fileID: 8300000, guid: dbd62c00193d9441db3e793357ea8288, type: 3}
+  - key: Stupid
+    message: "\u201CYou're a stupid, pitiful man\u201D"
+    name: Demon
+    sound: {fileID: 8300000, guid: 81882933440e04f7ab8fc6dd18addcdf, type: 3}
+  - key: Laughable
+    message: You're laughable
+    name: Demon
+    sound: {fileID: 8300000, guid: ba8678bb6a7e948f0871c2b958273b2e, type: 3}
   m_MasterGroup: {fileID: 2132019355}
 --- !u!222 &1327814758
 CanvasRenderer:
