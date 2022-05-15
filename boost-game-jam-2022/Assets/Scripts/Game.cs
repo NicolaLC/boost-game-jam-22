@@ -82,7 +82,7 @@ public class Game : SingletonPattern<Game>
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             m_PlayerActiveRunes--;
-            GameUIController.OnAIScore();
+            GameUIController.OnAIScore(m_PlayerActiveRunes);
             
             if (m_PlayerActiveRunes <= 0)
             {
@@ -100,7 +100,7 @@ public class Game : SingletonPattern<Game>
     {
         GameMessage.OnGameStart();
         
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
 
         m_bGameStarted = true;
         
@@ -268,7 +268,7 @@ public class Game : SingletonPattern<Game>
             {
                 m_PlayerActiveRunes--;
 
-                GameUIController.OnAIScore();
+                GameUIController.OnAIScore(m_PlayerActiveRunes);
                 
                 if (m_PlayerActiveRunes <= 0)
                 {
@@ -285,7 +285,7 @@ public class Game : SingletonPattern<Game>
     private IEnumerator RestartGame(bool i_bPlayerWin)
     {
         m_PlayerCamera.SetPlayerPosition();
-        
+
         if(m_WaitForPlayerActionCoroutine != null) StopCoroutine(m_WaitForPlayerActionCoroutine);
         if(m_WaitForAIActionCoroutine != null) StopCoroutine(m_WaitForAIActionCoroutine);
         
@@ -295,11 +295,18 @@ public class Game : SingletonPattern<Game>
         {
             m_AI.DoDeathAnimation();
         }
-
-        GameMessage.OnNewGame(m_PlayerActiveRunes, i_bPlayerWin);
         
+        yield return new WaitForSeconds(0.5f);
+        
+        SceneTransition.Show();
         yield return new WaitForSeconds(2);
         
+        SceneTransition.Hide();
+        yield return new WaitForSeconds(2);
+        
+        GameMessage.OnNewGame(m_PlayerActiveRunes, i_bPlayerWin);
+        yield return new WaitForSeconds(2);
+
         m_bGameStopped = false;
         
         m_Board.Reset();
@@ -311,7 +318,7 @@ public class Game : SingletonPattern<Game>
     private IEnumerator PlayerWin()
     {
         m_bGameStopped = true;
-        
+
         CursorManager.SetDefault(true);
         
         Debug.Log("Player win - show win screen");
@@ -321,7 +328,7 @@ public class Game : SingletonPattern<Game>
         m_PlayerCamera.SetEndGamePosition();
         
         yield return new WaitForSeconds(2);
-        
+
         CursorManager.SetDefault(true);
         
         EndGamePanels.OnWin();

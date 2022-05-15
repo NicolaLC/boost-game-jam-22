@@ -24,6 +24,11 @@ public class AIController : MonoBehaviour
     private List<Sprite> m_Bosses = new List<Sprite>();
 
     private int m_CurrentBossIndex = 0;
+    
+    [SerializeField] 
+    private List<GameObject> m_BossesDecals = new List<GameObject>();
+
+    private int m_CurrentBossDecalIndex = 0;
 
     private bool m_bFirstChoice = true;
     private readonly List<AIStep> m_PossibleMoves = new List<AIStep>();
@@ -31,6 +36,7 @@ public class AIController : MonoBehaviour
     private void Awake()
     {
         m_Sprite.sprite = m_Bosses[m_CurrentBossIndex];
+        m_BossesDecals[m_CurrentBossIndex].SetActive(true);
     }
 
     public bool GetNextMove(BoardController i_Board, out int o_Row, out int o_Col)
@@ -255,6 +261,10 @@ public class AIController : MonoBehaviour
         {
             yield break;
         }
+        m_BossesDecals[m_CurrentBossIndex].SetActive(false);
         m_Sprite.sprite = m_Bosses[++m_CurrentBossIndex];
+        
+        yield return new WaitForSeconds(1);
+        m_BossesDecals[m_CurrentBossIndex].SetActive(true);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameUIController : SingletonPattern<GameUIController>
 {
@@ -8,6 +9,9 @@ public class GameUIController : SingletonPattern<GameUIController>
 
     [SerializeField]
     private List<GameObject> m_Runes = new List<GameObject>();
+
+    [SerializeField] 
+    private Sprite m_InactiveRune = null;
 
     private UIElement_AwakenItem m_ActiveAwakenItem = null;
 
@@ -29,9 +33,9 @@ public class GameUIController : SingletonPattern<GameUIController>
         Instance.Internal_OnPlayerWin(i_CurrentAwaken);
     }
     
-    public static void OnAIScore()
+    public static void OnAIScore(int i_CurrentRunes)
     {
-        Instance.Internal_OnPlayerLose();
+        Instance.Internal_OnPlayerLose(i_CurrentRunes);
     }
 
     private void Internal_OnPlayerWin(int i_CurrentAwaken)
@@ -45,10 +49,12 @@ public class GameUIController : SingletonPattern<GameUIController>
         m_ActiveAwakenItem.SetActive(true);
     }
     
-    private void Internal_OnPlayerLose()
+    private void Internal_OnPlayerLose(int i_CurrentRunes)
     {
-        m_Runes[0].SetActive(false);
-        m_Runes[1].SetActive(true);
+        for (int i = i_CurrentRunes; i < m_Runes.Count; ++i)
+        {
+            m_Runes[i].GetComponent<Image>().sprite = m_InactiveRune;
+        }
     }
     
 }
