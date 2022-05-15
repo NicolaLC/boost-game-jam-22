@@ -39,7 +39,7 @@ public class CellController : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (!Game.GameStarted)
+        if (!Game.GameStarted || !Game.GameRunning)
         {
             return;
         }

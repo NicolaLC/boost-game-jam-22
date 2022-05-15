@@ -72,7 +72,7 @@ public class GameSentences : SingletonPattern<GameSentences>
     {
         if (m_UnusedPositiveSentences.Count == 0)
         {
-            m_UnusedPositiveSentences = m_OriginalPositiveSentences;
+            m_UnusedPositiveSentences.AddRange(m_OriginalPositiveSentences);
         }
         
         // choose a random sentence
@@ -85,15 +85,15 @@ public class GameSentences : SingletonPattern<GameSentences>
         m_PlayerSentenceRoot.SetActive(true);
 
         m_PlayerCardText.text = sentence.key;
-        m_PlayerCardNameText.text = sentence.name;
+        // m_PlayerCardNameText.text = sentence.name;
 
-        m_MasterGroup.volume = 0.5f;
+        m_MasterGroup.volume = 0.75f;
         m_PlayerSentenceAnimator.Play("Sentence_In");
 
         yield return new WaitForSeconds(5);
         
         m_PlayerCardText.text = "";
-        m_PlayerCardNameText.text = "";
+        // m_PlayerCardNameText.text = "";
         
         m_PlayerSentenceAnimator.Play("Sentence_Out");
         m_MasterGroup.volume = 1f;
@@ -106,7 +106,7 @@ public class GameSentences : SingletonPattern<GameSentences>
     {
         if (m_UnusedNegativeSentences.Count == 0)
         {
-            m_UnusedNegativeSentences = m_OriginalNegativeSentences;
+            m_UnusedNegativeSentences.AddRange(m_OriginalNegativeSentences);
         }
         
         // choose a random sentence
@@ -118,9 +118,9 @@ public class GameSentences : SingletonPattern<GameSentences>
         m_AISentenceRoot.SetActive(true);
         
         m_AICardText.text = sentence.key;
-        m_AICardNameText.text = sentence.name;
+        // m_AICardNameText.text = sentence.name;
         
-        m_MasterGroup.volume = 0.5f;
+        m_MasterGroup.volume = 0.75f;
         m_AISentenceAnimator.Play("Sentence_In");
         
         yield return new WaitForSeconds(5);
@@ -130,7 +130,7 @@ public class GameSentences : SingletonPattern<GameSentences>
         yield return new WaitForSeconds(1);
         
         m_AICardText.text = "";
-        m_AICardNameText.text = "";
+        // m_AICardNameText.text = "";
         m_AISentenceRoot.SetActive(false);
     }
 }

@@ -34,6 +34,7 @@ public class Game : SingletonPattern<Game>
 
     public static TurnTarget CurrentTarget => Instance.m_CurrentTarget;
     public static bool GameStarted => Instance.m_bGameStarted;
+    public static bool GameRunning => !Instance.m_bGameStopped;
 
     public static void CellSelected(int i_Row, int i_Col, TurnTarget i_Caller)
     {
@@ -65,14 +66,23 @@ public class Game : SingletonPattern<Game>
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            StartCoroutine(PlayerWin());
-            StartCoroutine(RestartGame());
+            m_GameAwakenCount++;
+            GameUIController.OnPlayerScore(m_GameAwakenCount);
+            if (m_GameAwakenCount == 5)
+            {
+                StartCoroutine(PlayerWin());
+            }
+            else
+            {
+                StartCoroutine(RestartGame(true));
+            }
         }
         
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            StartCoroutine(PlayerLose());
-            StartCoroutine(RestartGame());
+            m_PlayerActiveRunes--;
+            GameUIController.OnAIScore();
+            StartCoroutine(RestartGame(false));
         }
 #endif
     }
@@ -151,9 +161,16 @@ public class Game : SingletonPattern<Game>
         {
             return;
         }
+
+        m_bGameStopped = true;
         
         if (m_CurrentTarget == TurnTarget.Player)
         {
+            if (m_bPlayerSelectedCell)
+            {
+                return;
+            }
+            
             m_bPlayerSelectedCell = true;
         }
 
@@ -169,6 +186,8 @@ public class Game : SingletonPattern<Game>
     private IEnumerator MoveToNextTurn(bool i_bWin)
     {
         yield return new WaitForSeconds(5);
+
+        m_bGameStopped = false;
 
         if (i_bWin)
         {
@@ -215,7 +234,7 @@ public class Game : SingletonPattern<Game>
         {
             print("Game ended - nobody wins");
 
-            StartCoroutine(RestartGame());
+            StartCoroutine(RestartGame(false));
         }
         else
         {
@@ -233,7 +252,7 @@ public class Game : SingletonPattern<Game>
                 }
                 else
                 {
-                    StartCoroutine(RestartGame());
+                    StartCoroutine(RestartGame(true));
                 }
             }
             else
@@ -248,18 +267,24 @@ public class Game : SingletonPattern<Game>
                 }
                 else
                 {
-                    StartCoroutine(RestartGame());
+                    StartCoroutine(RestartGame(false));
                 }
             }
         }
     }
 
-    private IEnumerator RestartGame()
+    private IEnumerator RestartGame(bool i_bPlayerWin)
     {
-        StopCoroutine(m_WaitForPlayerActionCoroutine);
-        StopCoroutine(m_WaitForAIActionCoroutine);
+        StopAllCoroutines();
         
         m_bGameStopped = true;
+
+        if (i_bPlayerWin)
+        {
+            m_AI.DoDeathAnimation();
+        }
+
+        GameMessage.OnNewGame(m_PlayerActiveRunes, i_bPlayerWin);
         
         yield return new WaitForSeconds(2);
         

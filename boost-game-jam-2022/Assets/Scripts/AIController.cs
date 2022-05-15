@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -16,8 +17,21 @@ public class AIController : MonoBehaviour
     [SerializeField]
     private Animator m_Animator = null;
 
+    [SerializeField] 
+    private SpriteRenderer m_Sprite = null;
+
+    [SerializeField] 
+    private List<Sprite> m_Bosses = new List<Sprite>();
+
+    private int m_CurrentBossIndex = 0;
+
     private bool m_bFirstChoice = true;
     private readonly List<AIStep> m_PossibleMoves = new List<AIStep>();
+
+    private void Awake()
+    {
+        m_Sprite.sprite = m_Bosses[m_CurrentBossIndex];
+    }
 
     public bool GetNextMove(BoardController i_Board, out int o_Row, out int o_Col)
     {
@@ -231,5 +245,16 @@ public class AIController : MonoBehaviour
     public void DoDeathAnimation()
     {
         m_Animator.Play("Boss_Death");
+        StartCoroutine(ChangeBossGraphics());
+    }
+
+    private IEnumerator ChangeBossGraphics()
+    {
+        yield return new WaitForSeconds(1);
+        if (m_CurrentBossIndex >= m_Bosses.Count - 1)
+        {
+            yield break;
+        }
+        m_Sprite.sprite = m_Bosses[++m_CurrentBossIndex];
     }
 }

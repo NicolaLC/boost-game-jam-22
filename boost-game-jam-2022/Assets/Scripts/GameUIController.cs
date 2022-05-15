@@ -36,6 +36,10 @@ public class GameUIController : SingletonPattern<GameUIController>
 
     private void Internal_OnPlayerWin(int i_CurrentAwaken)
     {
+        if (i_CurrentAwaken >= m_AwakenItems.Count)
+        {
+            return;
+        }
         m_ActiveAwakenItem.SetActive(false);
         m_ActiveAwakenItem = m_AwakenItems[i_CurrentAwaken];
         m_ActiveAwakenItem.SetActive(true);

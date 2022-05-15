@@ -11,6 +11,7 @@ public class GameMessage : SingletonPattern<GameMessage>
     {
         Instance.Internal_OnGameStart();
     }
+    
 
     private void Internal_OnGameStart()
     {
@@ -27,4 +28,22 @@ public class GameMessage : SingletonPattern<GameMessage>
         string name = Game.CurrentTarget == Game.TurnTarget.Player ? "TORSTEN" : "DEMON";
         m_GameMessageText.Show($"{name} TURN");
     }
+    
+    public static void OnNewGame(int i_PlayerLives, bool i_bPlayerWins)
+    {
+        Instance.Internal_OnNewGame(i_PlayerLives, i_bPlayerWins);
+    }
+    
+    private void Internal_OnNewGame(int i_PlayerLives, bool i_bPlayerWins)
+    {
+        if (!i_bPlayerWins)
+        {
+            m_GameMessageText.Show($"Demon wins this turn.\n{i_PlayerLives} lives remaining.");
+        }
+        else
+        {
+            m_GameMessageText.Show($"You win this turn.");
+        }
+    }
+
 }
