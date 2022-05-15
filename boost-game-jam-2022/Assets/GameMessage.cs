@@ -25,7 +25,7 @@ public class GameMessage : SingletonPattern<GameMessage>
 
     private void Internal_OnNextTurn()
     {
-        string name = Game.CurrentTarget == Game.TurnTarget.Player ? "TORSTEN" : "DEMON";
+        string name = Game.CurrentTarget == Game.TurnTarget.Player ? "YOUR" : "DEMONS";
         m_GameMessageText.Show($"{name} TURN");
     }
     

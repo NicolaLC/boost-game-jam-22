@@ -68,7 +68,8 @@ public class Game : SingletonPattern<Game>
         {
             m_GameAwakenCount++;
             GameUIController.OnPlayerScore(m_GameAwakenCount);
-            if (m_GameAwakenCount == 5)
+            
+            if (m_GameAwakenCount >= 5)
             {
                 StartCoroutine(PlayerWin());
             }
@@ -82,7 +83,15 @@ public class Game : SingletonPattern<Game>
         {
             m_PlayerActiveRunes--;
             GameUIController.OnAIScore();
-            StartCoroutine(RestartGame(false));
+            
+            if (m_PlayerActiveRunes <= 0)
+            {
+                StartCoroutine(PlayerLose());
+            }
+            else
+            {
+                StartCoroutine(RestartGame(false));
+            }
         }
 #endif
     }
@@ -246,7 +255,7 @@ public class Game : SingletonPattern<Game>
                 
                 GameUIController.OnPlayerScore(m_GameAwakenCount);
 
-                if (m_GameAwakenCount == 5)
+                if (m_GameAwakenCount >= 5)
                 {
                     StartCoroutine(PlayerWin());
                 }
@@ -303,12 +312,12 @@ public class Game : SingletonPattern<Game>
         Debug.Log("Player win - show win screen");
         
         m_AI.DoDeathAnimation();
+                
+        m_PlayerCamera.SetEndGamePosition();
         
         yield return new WaitForSeconds(2);
         
-        m_PlayerCamera.SetEndGamePosition();
-        
-        m_bGameStopped = false;
+        EndGamePanels.OnWin();
     }
     
     private IEnumerator PlayerLose()
@@ -317,10 +326,10 @@ public class Game : SingletonPattern<Game>
         
         Debug.Log("Player lose - show lose screen");
         
-        yield return new WaitForSeconds(2);
-        
         m_PlayerCamera.SetEndGamePosition();
         
-        m_bGameStopped = false;
+        yield return new WaitForSeconds(2);
+        
+        EndGamePanels.OnLose();
     }
 }

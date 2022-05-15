@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
-public class EndGamePanels : MonoBehaviour
+public class EndGamePanels : SingletonPattern<EndGamePanels>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private GameObject m_WinPanel = null;
+    [SerializeField]
+    private GameObject m_LosePanel = null;
 
-    // Update is called once per frame
-    void Update()
+    public static void OnWin()
     {
-        
+        Instance.m_WinPanel.SetActive(true);
+    }
+    
+    public static void OnLose()
+    {
+        Instance.m_LosePanel.SetActive(true);
     }
 }
