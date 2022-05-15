@@ -5,6 +5,9 @@ using UnityEngine.UI;
 public class GameUIController : SingletonPattern<GameUIController>
 {
     [SerializeField] 
+    private GameObject m_TutorialRoot = null;
+    
+    [SerializeField] 
     private List<UIElement_AwakenItem> m_AwakenItems = new List<UIElement_AwakenItem>();
 
     [SerializeField]
@@ -56,5 +59,11 @@ public class GameUIController : SingletonPattern<GameUIController>
             m_Runes[i].GetComponent<Image>().sprite = m_InactiveRune;
         }
     }
-    
+
+    public static void ToggleTutorial(bool i_bActive)
+    {
+        Instance.m_TutorialRoot.SetActive(i_bActive);
+
+        Time.timeScale = i_bActive ? 0 : 1;
+    }
 }

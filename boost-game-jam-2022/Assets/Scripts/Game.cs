@@ -98,6 +98,11 @@ public class Game : SingletonPattern<Game>
     
     private IEnumerator StartGame()
     {
+        if (PlayerPrefs.GetInt("first_play") == 0)
+        {
+            PlayerPrefs.SetInt("first_play", 1);
+            GameUIController.ToggleTutorial(true);
+        }
         GameMessage.OnGameStart();
         
         yield return new WaitForSeconds(3);

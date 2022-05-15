@@ -5,6 +5,6 @@ public class HomeManager : MonoBehaviour
 {
     public void GoToIntro()
     {
-        SceneManager.LoadScene("Intro");
+        SceneManager.LoadScene("Credits");
     }
 }
