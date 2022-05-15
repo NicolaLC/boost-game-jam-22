@@ -18,6 +18,11 @@ public class EndGamePanels : SingletonPattern<EndGamePanels>
     {
         Instance.m_LosePanel.SetActive(true);
     }
+    
+    public static void BackHome()
+    {
+        SceneManager.LoadScene("Home");
+    }
 
     public static void Restart()
     {
